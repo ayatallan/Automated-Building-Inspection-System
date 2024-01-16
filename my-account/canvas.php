@@ -64,11 +64,11 @@
 		      
 		      if(type=="structural_defect")
 		      {
-		        color="#F58500";
+		        color="#fad02c";
 		      }
 		      else if(type=="cracks")
 		      {
-		        color="#19978A";
+		        color="#5593CE";
 		      }
 		      
           draw(x_pixel, y_pixel,color,x_meter,y_meter);
@@ -88,11 +88,11 @@
         <table style="border:1px solid #aaaa;position:absolute;left:22px;top:111px;font-weight:bold;background:#f7f7f7;padding:11px;">
           <tr>
             <td>Structural Defect</td>
-            <td ><div style="background-color:#F58500;width:22px;height:22px;border-radius:33px;margin:11px;"></div></td>
+            <td ><div style="background-color:#fad02c;width:22px;height:22px;border-radius:33px;margin:11px;"></div></td>
           </tr>
           <tr>
             <td>Cracks</td>
-            <td ><div style="background-color:#19978A;width:22px;height:22px;border-radius:33px;margin:11px;"></div></td>
+            <td ><div style="background-color:#5593CE;width:22px;height:22px;border-radius:33px;margin:11px;"></div></td>
           </tr>
         </table>
         <script>
