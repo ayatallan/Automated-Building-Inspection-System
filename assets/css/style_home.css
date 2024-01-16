@@ -1,0 +1,19 @@
+.in_page{
+	position:relative;
+	float:right;
+	width:100%;
+	/*min-height:500px;*/
+}
+
+
+.content{
+	margin:auto;
+	position:relative;
+	width:100%;
+	
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+

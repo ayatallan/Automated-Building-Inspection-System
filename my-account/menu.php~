@@ -1,0 +1,277 @@
+<?php
+include 'sessions.php';
+$admin_id=$_SESSION['sessionidadmin'];
+$sql="SELECT  `permission_info` FROM `admin_permission` WHERE 1 AND admin_id='$admin_id'";
+$permission_info_text=mysqli_fetch_array(mysqli_query($connect,$sql))['permission_info'];
+$permission_info_array=explode(',',$permission_info_text);
+
+//"1":"ادارة المستندات","2":"حسابات الموظفين والرواتب","3":"المصروفات","4":"الضبط و إعدادت الادارة","5":"النسخ الاحتياطية"
+?>
+<html>
+    <head>
+        <title></title>
+        <meta charset='utf-8'/>
+        <link rel='stylesheet' type='text/css' href='resources/css/style.css'/>
+        <script type='text/javascript' src='resources/js/jquery-1.9.1.min.js'></script>
+        <script type='text/javascript'>
+            $(function () {
+                $('.cont').hide();
+                $('.title').click(function () {
+                    if ($(this).next().is(':hidden')) {
+                        $(".title").next().slideUp("");
+                        $(this).next().slideDown("");
+                    } else {
+                        $(".title").next().slideUp("200");
+                    }
+                    return false;
+                });
+                $('#header-top').click(function () {
+                    $(this).next('.incs').slideToggle();
+                });
+            });
+            
+
+        </script>
+
+    </head>
+    <body class="sidebar" style="background-color:#F8F8FF;">
+
+       <div class='menu_block' style="background-color:#FFFFC0;border:1px dashed #055601;font-size:0.9em;border-radius:5px !important;">
+            <div class="title top_right_menu" style="background-color:#055601;color:#fff;border-top-right-radius:5px !important;border-top-left-radius:5px !important;"> اهلا بك في حساب الادارة </div>
+            <div class='content ' style="padding:10px;">
+            	<span style="font-size:0.9em;color:#1F7800;margin:5px;"><?php echo mysqli_fetch_array(mysqli_query($connect,"SELECT name FROM admin WHERE 1 AND id=".$_SESSION['sessionidadmin']))['name'];?></span>
+
+            </div>
+        </div>       
+
+
+		<?php
+		if(in_array("1", $permission_info_array))
+		{
+		?>
+        <div class='menu_block' style="font-size: 0.9em;">
+            <div class="title top_right_menu" style="background-color:#0083C4;color:#fff;border-top-right-radius:5px !important;border-top-left-radius:5px !important;">ادارة المستندات</div>
+            <div class='content cont'>
+
+
+
+
+
+
+            	<hr style="width:100%;background-color:orange;">
+
+ 
+ 
+ 
+                
+                
+            	
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#C6FFBD;">
+					السجلات
+				</div>
+            	<a href='partner-management/partners.php' target='home' style="font-size:0.9em;">سجل شركاء العمل</a>
+            	<a href='customer-management/customer.php' target='home' style="font-size:0.9em;">سجل الزبائن</a>
+				
+				<hr style="width:100%;background-color:#cccccc;">
+                <a href='file-management/files.php' target='home' style="font-size:0.9em;">الملفات</a>
+            	
+				<a href='alert-management/alerts.php' target='home' style="font-size:0.9em;">قائمة التنبيهات</a>
+				
+				<hr style="width:100%;background-color:orange;">
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#C6FFBD;">
+					تقارير الارصدة المتبقية
+				</div>
+				<a href='file-management/files_customer_remain_money.php' target='home' style="font-size:0.9em;">ارصدة متبقية على الافراد</a>
+				<a href='file-management/view-payment-to/files_partner_remain_money.php' target='home' style="font-size:0.9em;">ارصدة متبقية للشركاء</a>
+            </div>
+        </div>
+        
+		<?php
+		}
+		if(in_array("2", $permission_info_array))
+		{
+		?>
+        <div class='menu_block' style="font-size: 0.9em;">
+            <div class="title top_right_menu" style="background-color:#0083C4;color:#fff;border-top-right-radius:5px !important;border-top-left-radius:5px !important;">مالية المستندات</div>
+            <div class='content cont'>
+               	
+            	<hr style="width:100%;background-color:orange;">
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#C6FFBD;">
+					المدفوعات عن الملفات من الاشخاص
+				</div>
+
+            	<a href='file-management/insert_new_payment_from_file_customer.php' target='home' style="font-size:0.9em;">تسجيل دفعة</a>   
+                <a href='file-management/report_payment_from_file.php' target='home' style="font-size:0.9em;">تقارير دفعات</a>
+                <a href='file-management/report_cheque_search_filter.php' target='home' style="font-size:0.9em;">تقارير الشيكات</a>
+
+
+
+
+
+ 
+            	<hr style="width:100%;background-color:orange;">
+            	
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#C6FFBD;">
+					المدفوعات عن الملفات الى الشركاء
+				</div>
+
+            	<a href='file-management/view-payment-to/insert_new_payment_to.php' target='home' style="font-size:0.9em;">تسجيل دفعة</a>   
+                <a href='file-management/view-payment-to/report_payment_to.php' target='home' style="font-size:0.9em;">تقارير دفعات</a>
+                <a href='file-management/view-payment-to/report_cheque_issued.php' target='home' style="font-size:0.9em;">تقارير الشيكات</a>
+            </div>
+        </div>
+        
+		<?php
+		}
+		if(in_array("3", $permission_info_array))
+		{
+		?>
+        <div class='menu_block' style="font-size: 0.9em;">
+            <div class="title top_right_menu" style="background-color:#0083C4;color:#fff;border-top-right-radius:5px !important;border-top-left-radius:5px !important;">ضبط فئات المستندات</div>
+            <div class='content cont'>
+               
+            	<hr style="width:100%;background-color:orange;">
+            	
+            	
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#dfe3ee;">
+					ضبط الفئات
+				</div>
+				
+                <a href='file-management/files_categories.php' target='home' style="font-size:0.9em;">فئات الملفات</a>
+                <a href='articles/article_type_management.php' target='home' style="font-size:0.9em;">فئات الأوراق داخل الملف</a>
+                <a href='alert-management/alerts_categories.php' target='home' style="font-size:0.9em;">فئات التنبيه داخل الملف</a>
+
+ 
+ 
+ 
+            </div>
+        </div>
+		<?php
+		}
+
+		if(in_array("4", $permission_info_array))
+		{
+		?>
+        
+        <div class='menu_block' style="font-size: 0.9em;">
+            <div class="title top_right_menu"> المصروفات</div>
+            <div class='content cont'>
+            	<hr style="width:100%;background-color:orange;">
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#dfe3ee;">
+					ضبط المصروفات
+				</div>
+                <a href='expenses-management/expenses_categories.php' target='home' style="font-size:0.9em;">فئات المصروفات</a>
+
+
+                <a href='expenses-management/expenses.php' target='home' style="font-size:0.9em;">قائمة المصروفات</a>
+
+                <hr style="width:100%;">
+                <!--a href='expenses-management/report_balance_expenses.php' target='home' style="font-size:0.9em;">تقارير ميزانية المصروفات</a-->
+            	<hr style="width:100%;background-color:orange;">
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#dfe3ee;">
+					 المصروفات المستحقة
+				</div>
+				
+                <a href='expenses-management/expenses_journal.php' target='home' style="font-size:0.9em;">يومية المصروفات</a>
+				<a href='expenses-management/report_expenses.php' target='home' style="font-size:0.9em;">تقارير المصروفات</a>
+            	<hr style="width:100%;background-color:orange;">
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#dfe3ee;">
+					دفعات للمصروفات
+				</div>
+				
+				
+				
+            	
+            	<a href='expenses-management/view-payment-to/insert_new_payment_to.php' target='home' style="font-size:0.9em;">تسجيل دفعات للمصروفات</a> 
+            	 
+            	 
+
+                <a href='expenses-management/view-payment-to/report_payment_to.php' target='home' style="font-size:0.9em;">تقارير دفعات للمصروفات</a>
+                
+                <a href='expenses-management/view-payment-to/report_cheque_issued.php' target='home' style="font-size:0.9em;">تقارير بحث الشيكات للمصروفات</a>
+
+
+            </div>
+        </div>
+
+		<?php
+		}
+
+		if(in_array("5", $permission_info_array))
+		{
+		?>
+        
+        <div class='menu_block' style="font-size: 0.9em;">
+            <div class="title top_right_menu" >حسابات اخرى</div>
+            <div class='content cont'>
+            
+            	<hr style="width:100%;background-color:orange;">
+
+                <a href='other-account-management/bank.php' target='home' style="font-size:0.9em;">البنوك</a>
+
+                
+            	<hr style="width:100%;background-color:orange;">
+
+                <a href='other-account-management/residence_region.php' target='home' style="font-size:0.9em;">مناطق الاقامة</a>
+
+            	<hr style="width:100%;background-color:orange;">
+
+                <a href='other-account-management/currency.php' target='home' style="font-size:0.9em;">العملات</a>
+
+
+            </div>
+        </div>
+        
+		<?php
+		}
+
+		if(in_array("6", $permission_info_array) || $admin_id==1) ##يعني ان المدير العام يجيب ان يرى الاعدادت  في كل الاحوال
+		{
+		?>
+
+
+       <div class='menu_block' style="font-size: 0.9em;">
+            <div class="title top_right_menu">  الضبط و إعدادت الادارة</div>
+            <div class='content cont'>
+                <hr style="width:100%;background-color:orange;">
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#dfe3ee;">
+					بيانات الموقع
+				</div>
+                <a href='setting/setting.php' target='home' style="font-size:0.9em;color:red;">اعدادات الموقع</a>
+                <hr style="width:100%;background-color:orange;">
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#dfe3ee;">
+					سياسة الخصوصية والادارة
+				</div>
+
+
+            	<a href='admin-management/admin.php' target='home' style="font-size:0.9em;color:#3939ac;">حسابات الادارة</a>
+            	<a href='admin-management/admin_permission.php' target='home' style="font-size:0.9em;color:#3939ac;">صلاحيات الادارة</a>
+            	
+            	
+            	<hr style="width:100%;background-color:orange;">
+				<div style="font-size: 0.9em;padding-right:19px;background-color:#dfe3ee;">
+					المراقبة
+				</div>
+                <a href='login-history/login_history_admin.php' target='home' style="font-size:0.9em;color:#3939ac;">سجلات دخول الادارة</a>
+            </div>
+        </div>
+		<?php
+		}
+		if(in_array("7", $permission_info_array))
+		{
+		?>
+        <div class='menu_block' style="font-size: 0.9em;">
+            <div class="title top_right_menu">النسخ الحتياطي</div>
+            <div class='content cont'>
+            	<a href='setting/db_bkp.php' target='home' style="font-size:0.9em;color:red;">نسخ احتياطى لقاعدة البيانات</a>
+            </div>
+        </div>
+		<?php
+		}
+
+		?>
+		
+		
+		
+    </body>
+</html>

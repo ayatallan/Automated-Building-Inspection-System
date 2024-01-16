@@ -1,0 +1,31 @@
+<?php
+include 'sessions.php';
+?>
+<html>
+    <head>
+        <title></title>
+        <meta charset='utf-8'/>
+        <link rel='stylesheet' type='text/css' href='resources/css/style.css'/>
+        <script type='text/javascript' src='resources/js/jquery-1.9.1.min.js'></script>
+
+    </head>
+    
+    
+    <body align="middle" style="background-color:#f7f7f7;margin:0px;padding:0px;">
+
+
+        <hr>
+		<table style="width:100%;">
+			<tr >
+				<td width="100%" align="middle">
+					<font color="#555" size="2px"><b>
+				  <?php echo mysqli_fetch_array(mysqli_query($connect,"SELECT value FROM site_setting WHERE 1 AND attribute='site_copywrite';"))['value']; ?>
+					</font></b>
+				</td>
+
+			</tr>
+		</table>
+		<hr>
+
+    </body>
+</html>

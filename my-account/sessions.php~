@@ -1,0 +1,17 @@
+<?php
+error_reporting(0);
+ob_start();
+session_start();
+if(file_exists('../config.php'))include '../config.php';
+if(file_exists('../../config.php'))include '../../config.php';
+if(file_exists('../../../config.php'))include '../../../config.php';//use it when call session from /search-select-list/controller/functions.php
+
+if(!isset($_SESSION['sessionnameadmin']) && !isset($_SESSION['sessionpassadmin'])){
+
+	if(file_exists('../LOGIN/login.php'))echo"<meta http-equiv='Refresh'  content='0;url=../LOGIN/login.php'/>";
+	
+	else if(file_exists('../../LOGIN/login.php')) echo"<meta http-equiv='Refresh'  content='0;url=../../LOGIN/login.php'/>";
+	exit;
+	}
+ob_end_flush();
+?>

@@ -1,0 +1,57 @@
+<?php
+include_once 'files/header.php';
+
+include 'alert-messages/alert_messages.php';
+
+
+?>
+
+<?php
+
+        $date = date('d-m-Y');
+        $todaylogin = mysqli_num_rows(mysqli_query($connect, "SELECT id FROM login WHERE date ='$date'"));
+        
+
+        ?>
+
+        <div class="clear"></div>
+
+        
+ 
+         <table width='85%' class="table">
+        <caption><div class='title'>  بيانات الموقع  </div></caption>
+        
+ 
+            <tr>
+                <td width="50%"><a href='login_history.php' target='home'>زوار اليوم</a></td>
+		            <td  width="50%">             
+		           
+		            <span><?php echo $todaylogin ?></span>
+            	</td>
+            </tr>
+            
+        
+            <tr>
+                <td width="50%">الخاص بك IP</td>
+                <td  width="50%">             
+               
+                <span>(<?= getenv("REMOTE_ADDR"); ?>)</span>
+            </td>
+            </tr>
+            <tr>
+                <td  width="50%">الوقت </td>
+                <td  width="50%">           
+                	<span><?= date("F j, Y, g:i a"); ?></span>
+           			
+            	</td>
+            </tr>
+
+                    
+                    
+        </table>
+        
+        
+        <?php
+   
+    include_once 'files/footer.php';
+    ?>
