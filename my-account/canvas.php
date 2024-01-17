@@ -22,18 +22,15 @@
     </style>
     
     <script>
-      var scale_meter_to_pixel=1;//each meter convert to pixel
+      var scale_meter_to_pixel=35.37;//each meter convert to pixel
       
       function data_getted_by_mqtt_to_canvas(topic_name,message_arrived)
       {
-	      //alert(topic_name);
 	      
 	      if(topic_name=="project_topic/automated_building_inspection_system/location")
 	      {
 	      
-	        //162
-	        //277
-		      //alert(message_arrived);
+	    
 		      
 		      var valuesArray = message_arrived.split(',');
 		      var x_meter=valuesArray[0];
@@ -100,13 +97,9 @@
           
             var canvas = document.getElementById("test_canvas");
     
-            canvas.width = 512;//window.innerWidth;
-            canvas.height = 480;//window.innerHeight;
+            canvas.width = 512;
+            canvas.height = 480;
 
-
-            //alert(canvas.width);
-            //alert(canvas.height);
-            
             
             var l = canvas.getContext('2d');
             var backgroundImage = new Image();
