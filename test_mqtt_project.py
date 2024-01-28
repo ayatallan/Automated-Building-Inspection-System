@@ -2,7 +2,7 @@
 
 import time
 import paho.mqtt.client as paho
-from paho import mqtt
+from   paho import mqtt
 
 import threading
 
@@ -68,7 +68,7 @@ def demo_test_publish():
     msg="0,3,cracks"
     publish_mqtt("project_topic/automated_building_inspection_system/location",msg)
     time.sleep(2)
-    msg2="4.7,3.58,structural_defect"
+    msg2="4.7,3.58,1 structural defect"
     publish_mqtt("project_topic/automated_building_inspection_system/location",msg2)
     time.sleep(2)
 

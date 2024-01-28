@@ -52,18 +52,18 @@
           /*
           ##(analysis)##
           x_pixel=parseInt(x_pixel)+162;//162 --> distance from left to new origin
-		      y_pixel=(canvas.height-parseInt(y_pixel))-(canvas.height-277);//277  --> distance from top to new origin
+		  y_pixel=(canvas.height-parseInt(y_pixel))-(canvas.height-277);//277  --> distance from top to new origin
 		      */     
           //=============================================
           
           
 		      var color="#555";
 		      
-		      if(type=="structural_defect")
+		      if(type=="1 structural defect")
 		      {
 		        color="#fad02c";
 		      }
-		      else if(type=="cracks")
+		      else if(type=="0 cracks")
 		      {
 		        color="#5593CE";
 		      }
@@ -84,7 +84,7 @@
 
         <table style="border:1px solid #aaaa;position:absolute;left:22px;top:111px;font-weight:bold;background:#f7f7f7;padding:11px;">
           <tr>
-            <td>Structural Defect</td>
+            <td>Structural defect</td>
             <td ><div style="background-color:#fad02c;width:22px;height:22px;border-radius:33px;margin:11px;"></div></td>
           </tr>
           <tr>

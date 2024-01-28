@@ -101,9 +101,8 @@ include "header.php";
 <span class="person-name">Hello <font style="text-transform: uppercase;
 color:#FAD02C;text-shadow:1px 1px 3px #000;">
         <?php echo $row['fname'] . ' ' . $row['lname']; ?>
-    </font></span>
-<i class="fa fa-hand-peace-o" style="font-size:2.3em;color:#FAD02C;text-shadow:0px 1px 3px #000;margin:3px;"></i>
-
+    </font>    &#128075;
+</span>
 <br>
 <br>
 <div class="wrapper">
