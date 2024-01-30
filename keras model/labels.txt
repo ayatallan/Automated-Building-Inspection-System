@@ -1,0 +1,3 @@
+0 cracks 
+1 structural defects 
+2 normal
