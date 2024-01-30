@@ -1,8 +1,6 @@
-
-
 import time
 import paho.mqtt.client as paho
-from   paho import mqtt
+from paho import mqtt
 
 import threading
 
@@ -12,13 +10,13 @@ import random
 # setting callbacks for different events to see if it works, print the message etc.
 def on_connect(client, userdata, flags, rc, properties=None):
     print("CONNACK received with code %s." % rc)
-    
+
     if rc == 0:
       print("Connected to MQTT Broker!")
     else:
       print("Failed to connect, return code %d\n", rc)
-      
-      
+
+
 
 def on_publish(client, userdata, mid, properties=None):
     print("publish OK => mid: " + str(mid))
@@ -68,7 +66,7 @@ def demo_test_publish():
     msg="0,3,cracks"
     publish_mqtt("project_topic/automated_building_inspection_system/location",msg)
     time.sleep(2)
-    msg2="4.7,3.58,1 structural defect"
+    msg2="4.7,3.58,structural_defect"
     publish_mqtt("project_topic/automated_building_inspection_system/location",msg2)
     time.sleep(2)
 
@@ -76,18 +74,8 @@ def demo_test_publish():
 
 
 
-  
+
 t1 = threading.Thread(target=lambda :client.loop_forever(), args=())
 t1.start()
 
 demo_test_publish()
-
-
-
-
-
-
-
-
-
-

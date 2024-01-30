@@ -59,11 +59,11 @@
           
 		      var color="#555";
 		      
-		      if(type=="1 structural defect")
+		      if(type=="structural_defect")
 		      {
 		        color="#fad02c";
 		      }
-		      else if(type=="0 cracks")
+		      else if(type=="cracks")
 		      {
 		        color="#5593CE";
 		      }
