@@ -64,8 +64,8 @@ def demo_test_publish():
 
   
       msg = "0,3,cracks";
-      msgCloseY = "0,2,cracks";
-      msgEvenCloserY = "0,3.2,structural_defect";
+      msgCloseY = "4.7,3.75,structural_defect";
+      # msgEvenCloserY = "0,3.2,structural_defect";
 
       #  Publish the messages
       publish_mqtt("project_topic/automated_building_inspection_system/location", msg);
