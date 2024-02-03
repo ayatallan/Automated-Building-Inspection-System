@@ -62,17 +62,17 @@ def demo_test_publish():
 
   while 1:
 
-    #msg=str(random.randint(0, 500))+","+str(random.randint(0, 500))+","+['structural_defect','cracks'][random.randint(0, 1)]
-    msg="0,3,cracks"
-    publish_mqtt("project_topic/automated_building_inspection_system/location",msg)
-    time.sleep(2)
-    msg2="4.7,3.58,structural_defect"
-    publish_mqtt("project_topic/automated_building_inspection_system/location",msg2)
-    time.sleep(2)
+  
+      msg = "0,3,cracks";
+      msgCloseY = "0,2,cracks";
+      msgEvenCloserY = "0,3.2,structural_defect";
 
+      #  Publish the messages
+      publish_mqtt("project_topic/automated_building_inspection_system/location", msg);
+      publish_mqtt("project_topic/automated_building_inspection_system/location", msgCloseY);
+      publish_mqtt("project_topic/automated_building_inspection_system/location", msgEvenCloserY);
 
-
-
+      time.sleep(2)
 
 
 t1 = threading.Thread(target=lambda :client.loop_forever(), args=())
