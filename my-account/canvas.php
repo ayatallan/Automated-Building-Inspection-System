@@ -21,14 +21,14 @@
 
     <div align="middle" style="width:100%;">
 
-        <button class="btn btn-b" style="float:center;margin-right:22px;" onclick="saveCanvas();"> Save Image </button>
-
-        <label class="btn btn-b" style="margin-right:22px;">
-            Change Background<input type="file" id="imageInput" onchange="change_background(this);" style="float:center; margin-right:22px;" hidden>
-        </label>
-        <button class="btn btn-b" style="float:center;" onclick="resetBackground();">Reset Background</button>
-        <button class="btn btn-b" style="float:center;" onclick="generatePDF();">Generate PDF</button>
-
+    <div class="btn-container">
+            <label class="btn btn-b">
+                Change Background<input type="file" id="imageInput" onchange="change_background(this);" hidden>
+            </label>
+            <button class="btn btn-b" onclick="resetBackground();">Reset Background</button>
+            <button class="btn btn-b" onclick="saveCanvas();">Save Image</button>
+            <button class="btn btn-b" onclick="generatePDF();">Generate PDF</button>
+        </div>
         <style>
             h1 {
                 color: green;
@@ -38,6 +38,15 @@
                 float: center;
                 margin: 44px;
             }
+            .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            margin-right: 10px; /* Adjust the right margin */
+        }
         </style>
         <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
@@ -66,9 +75,9 @@
 
                     var color = "#555";
 
-                    if (type == "structural_defect") {
+                    if (type.includes("structural")) {
                         color = "#fad02c";
-                    } else if (type == "cracks") {
+                    } else if (type.includes("cracks")) {
                         color = "#5593CE";
                     }
 
@@ -143,6 +152,7 @@
                 </tr>
             </table>
             <script>
+
                 var canvas = document.getElementById("test_canvas");
 
                 canvas.width = 512;
@@ -196,61 +206,62 @@
                 }
 
                 function generatePDF() {
-                    // Get the current date and time
-                    var currentDate = new Date();
-                    var formattedDate = currentDate.toLocaleDateString();
-                    var formattedTime = currentDate.toLocaleTimeString();
+    // Get the current date and time
+    var currentDate = new Date();
+    var formattedDate = currentDate.toLocaleDateString();
+    var formattedTime = currentDate.toLocaleTimeString();
 
-                    // Get the first and last name from PHP (assuming you are in a PHP context)
-                    var fullName = "<?php echo $row['fname'] . ' ' . $row['lname']; ?>";
+    // Get the first and last name from PHP (assuming you are in a PHP context)
+    var fullName = "<?php echo $row['fname'] . ' ' . $row['lname']; ?>";
 
-                    // Create a div to hold the printable content
-                    var pdfElement = document.createElement('div');
-                    pdfElement.innerHTML = `
-                        <div style="text-align: center; margin-bottom: 20px;">
-                            <img src='../assets/images/logo.png' alt="Logo" style="width: 80px; height: 80px; margin-bottom: 10px;">
-                            <h1 style="color: #5593CE; font-size: 24px;">Automated Building Inspection Report</h1>
-                            <p style="color: #777; font-size: 16px;">${formattedDate} ${formattedTime}</p>
-                        </div>
-                        <p style="color: #fad02c; font-size: 18px; text-align: center;">Welcome, ${fullName}!</p>
-                        <p style="color: #555; font-size: 16px; text-align: center;">
-                            This report provides details about the current status of your building and highlights the locations of identified defects.
-                        </p>
-                        <table style="border-collapse: collapse; width: 70%; margin: auto; text-align: center; margin-top: 20px; background-color: #f7f7f7;">
-                            <tr>
-                                <th style="border: none; padding: 8px; background-color: #5593CE; color: white;">Defect Type</th>
-                                <th style="border: none; padding: 8px; background-color: #5593CE; color: white;">Color</th>
-                            </tr>
-                            <tr>
-                                <td style="border: none; padding: 8px; color:black; ">Structural defect</td>
-                                <td style="border: none; padding: 8px; background-color: #f7f7f7; color: #fad02c; font-size:20px;">&bull;</td>
-                            </tr>
-                            <tr>
-                                <td style="border: none; padding: 8px; color:black;">Cracks</td>
-                                <td style="border: none; padding: 8px; background-color: #f7f7f7; color: #5593CE; font-size:20px;">&bull;</td>
-                            </tr>
-                        </table>
-                        <p style="color: #555; font-size: 16px; text-align: center;">This map will show you the location of the defects.</p>
+    // Create a div to hold the printable content
+    var pdfElement = document.createElement('div');
+    pdfElement.innerHTML = `
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src='../assets/images/logo.png' alt="Logo" style="width: 80px; height: 80px; margin-bottom: 10px;">
+            <h1 style="color: #5593CE; font-size: 24px;">Automated Building Inspection Report</h1>
+            <p style="color: #777; font-size: 16px;">${formattedDate} ${formattedTime}</p>
+        </div>
+        <p style="color: #fad02c; font-size: 18px; text-align: center;">Welcome, ${fullName}!</p>
+        <p style="color: #555; font-size: 16px; text-align: center;">
+            This report provides details about the current status of your building and highlights the locations of identified defects.
+        </p>
+        <table style="border-collapse: collapse; width: 70%; margin: auto; text-align: center; margin-top: 20px; background-color: #f7f7f7;">
+            <tr>
+                <th style="border: none; padding: 8px; background-color: #5593CE; color: white;">Defect Type</th>
+                <th style="border: none; padding: 8px; background-color: #5593CE; color: white;">Color</th>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 8px; color:black; ">Structural defect</td>
+                <td style="border: none; padding: 8px; background-color: #f7f7f7; color: #fad02c; font-size:20px;">&bull;</td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 8px; color:black;">Cracks</td>
+                <td style="border: none; padding: 8px; background-color: #f7f7f7; color: #5593CE; font-size:20px;">&bull;</td>
+            </tr>
+        </table>
+                <p style="color: #555; font-size: 16px; text-align: center;">This map will show you the location of the defects.</p>
+        <canvas id="pdf_canvas" style="display: block; margin: auto; margin-top: 20px; background-color: #f7f7f7;"></canvas>
+        <p style="color: #555; font-size: 16px; text-align: center; margin-top: 20px;">This report is generated by Turtlebot 2 with ID: 123456789.</p>
+    `;
 
-                        <canvas id="pdf_canvas" style="display: block; margin: auto; margin-top: 20px; background-color: #f7f7f7;"></canvas>
-                        <p style="color: #555; font-size: 16px; text-align: center; margin-top: 20px;">This report is generated by Turtlebot 2 with ID: 123456789.</p>
-                    `;
+    // Set up the canvas for drawing
+    var pdfCanvas = pdfElement.querySelector('#pdf_canvas');
+    pdfCanvas.width = 512;
+    pdfCanvas.height = 480;
 
-                    // Set up the canvas for drawing
-                    var pdfCanvas = pdfElement.querySelector('#pdf_canvas');
-                    pdfCanvas.width = 512;
-                    pdfCanvas.height = 480;
+    var pdfContext = pdfCanvas.getContext('2d');
+    pdfContext.drawImage(canvas, 0, 0, pdfCanvas.width, pdfCanvas.height);
 
-                    var pdfContext = pdfCanvas.getContext('2d');
-                    pdfContext.drawImage(canvas, 0, 0, pdfCanvas.width, pdfCanvas.height);
+    // Generate the PDF using html2pdf
+    html2pdf(pdfElement, {
+        margin: 10,
+        filename: 'building_inspection_report.pdf',
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    });
+}
 
-                    // Generate the PDF using html2pdf
-                    html2pdf(pdfElement, {
-                        margin: 10,
-                        filename: 'building_inspection_report.pdf',
-                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                    });
-                }
+
             </script>
         </center>
     </div>
