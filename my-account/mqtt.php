@@ -165,7 +165,21 @@
 		setTimeout(function run_connection(){sub_topics(['project_topic/automated_building_inspection_system/location',]);}, 2000);
 	}
 	
-	
+	function disconnectMQTT() {
+    if (mqtt && connected_flag) {
+        console.log("Disconnecting from MQTT...");
+        mqtt.disconnect();
+        connected_flag = 0;
+        console.log("Disconnected.");
+    } else {
+        console.log("Not connected to MQTT.");
+    }
+}
+function reconnectMQTT() {
+    console.log("Reconnecting to MQTT...");
+    run_connection();
+}
+
 </script>
  
 

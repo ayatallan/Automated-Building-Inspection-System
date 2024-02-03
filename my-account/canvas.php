@@ -14,6 +14,49 @@
             float: center;
             margin: 44px;
         }
+
+        h1 {
+            color: green;
+        }
+
+        #test_canvas {
+            float: center;
+            margin: 44px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            margin-right: 10px;
+            /* Adjust the right margin */
+            padding-left: 2rem;
+            padding-right: 2rem;
+            font-size: large;
+            border: 2px solid #7D9BCC;
+
+
+        }
+
+        .btn-disconnect,
+        .btn-reconnect {
+            background-color: #fad02c;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px #555;
+            border: 2px solid #d4b226;
+            padding-left: 4rem;
+            padding-right: 4rem;
+
+        }
+
+        .btn-disconnect:hover,
+        .btn-reconnect:hover {
+            background-color: #d4b226;
+        }
     </style>
 </head>
 
@@ -21,33 +64,6 @@
 
     <div align="middle" style="width:100%;">
 
-    <div class="btn-container">
-            <label class="btn btn-b">
-                Change Background<input type="file" id="imageInput" onchange="change_background(this);" hidden>
-            </label>
-            <button class="btn btn-b" onclick="resetBackground();">Reset Background</button>
-            <button class="btn btn-b" onclick="saveCanvas();">Save Image</button>
-            <button class="btn btn-b" onclick="generatePDF();">Generate PDF</button>
-        </div>
-        <style>
-            h1 {
-                color: green;
-            }
-
-            #test_canvas {
-                float: center;
-                margin: 44px;
-            }
-            .btn-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .btn {
-            margin-right: 10px; /* Adjust the right margin */
-        }
-        </style>
         <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
         <script>
@@ -129,11 +145,19 @@
                 return true;
             }
         </script>
+        <div class="btn-container">
+            <label class="btn btn-b">
+                Change Map<input type="file" id="imageInput" onchange="change_background(this);" hidden>
+            </label>
+            <button class="btn btn-b" onclick="resetBackground();">Reset Map</button>
+            <button class="btn btn-b" onclick="saveCanvas();">Save Map</button>
+            <button class="btn btn-b" onclick="generatePDF();">Generate PDF</button>
 
+
+        </div>
         <center>
 
             <canvas id="test_canvas"></canvas>
-
             <table
                 style="border:1px solid #aaaa;position:absolute;left:22px;top:111px;font-weight:bold;background:#f7f7f7;padding:11px;">
                 <tr>
@@ -151,6 +175,10 @@
                     </td>
                 </tr>
             </table>
+            <div class="connection">
+                <button onclick="disconnectMQTT()" class="btn btn-disconnect">Disconnect MQTT</button>
+                <button class="btn btn-reconnect" onclick="reconnectMQTT();">Reconnect MQTT</button>
+            </div>
             <script>
 
                 var canvas = document.getElementById("test_canvas");
@@ -206,17 +234,17 @@
                 }
 
                 function generatePDF() {
-    // Get the current date and time
-    var currentDate = new Date();
-    var formattedDate = currentDate.toLocaleDateString();
-    var formattedTime = currentDate.toLocaleTimeString();
+                    // Get the current date and time
+                    var currentDate = new Date();
+                    var formattedDate = currentDate.toLocaleDateString();
+                    var formattedTime = currentDate.toLocaleTimeString();
 
-    // Get the first and last name from PHP (assuming you are in a PHP context)
-    var fullName = "<?php echo $row['fname'] . ' ' . $row['lname']; ?>";
+                    // Get the first and last name from PHP (assuming you are in a PHP context)
+                    var fullName = "<?php echo $row['fname'] . ' ' . $row['lname']; ?>";
 
-    // Create a div to hold the printable content
-    var pdfElement = document.createElement('div');
-    pdfElement.innerHTML = `
+                    // Create a div to hold the printable content
+                    var pdfElement = document.createElement('div');
+                    pdfElement.innerHTML = `
         <div style="text-align: center; margin-bottom: 20px;">
             <img src='../assets/images/logo.png' alt="Logo" style="width: 80px; height: 80px; margin-bottom: 10px;">
             <h1 style="color: #5593CE; font-size: 24px;">Automated Building Inspection Report</h1>
@@ -240,29 +268,29 @@
                 <td style="border: none; padding: 8px; background-color: #f7f7f7; color: #5593CE; font-size:20px;">&bull;</td>
             </tr>
         </table>
-                <p style="color: #555; font-size: 16px; text-align: center;">This map will show you the location of the defects.</p>
+        <p style="color: #555; font-size: 16px; text-align: center;">This map will show you the location of the defects.</p>
         <canvas id="pdf_canvas" style="display: block; margin: auto; margin-top: 20px; background-color: #f7f7f7;"></canvas>
         <p style="color: #555; font-size: 16px; text-align: center; margin-top: 20px;">This report is generated by Turtlebot 2 with ID: 123456789.</p>
         <footer style="text-align: center; margin-top: 20px;">
-                            <p style="font-size: 12px; color: #777;">&copy; Ayat, Raghad, Yara | inspection system </p>
-                        </footer>
+        <p style="font-size: 12px; color: #777;">&copy; Ayat, Raghad, Yara | inspection system </p>
+        </footer>
         `;
 
-    // Set up the canvas for drawing
-    var pdfCanvas = pdfElement.querySelector('#pdf_canvas');
-    pdfCanvas.width = 512;
-    pdfCanvas.height = 480;
+                    // Set up the canvas for drawing
+                    var pdfCanvas = pdfElement.querySelector('#pdf_canvas');
+                    pdfCanvas.width = 512;
+                    pdfCanvas.height = 480;
 
-    var pdfContext = pdfCanvas.getContext('2d');
-    pdfContext.drawImage(canvas, 0, 0, pdfCanvas.width, pdfCanvas.height);
+                    var pdfContext = pdfCanvas.getContext('2d');
+                    pdfContext.drawImage(canvas, 0, 0, pdfCanvas.width, pdfCanvas.height);
 
-    // Generate the PDF using html2pdf
-    html2pdf(pdfElement, {
-        margin: 10,
-        filename: 'building_inspection_report.pdf',
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    });
-}
+                    // Generate the PDF using html2pdf
+                    html2pdf(pdfElement, {
+                        margin: 10,
+                        filename: 'building_inspection_report.pdf',
+                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                    });
+                }
 
 
             </script>

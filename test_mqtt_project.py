@@ -70,7 +70,7 @@ def demo_test_publish():
       #  Publish the messages
       publish_mqtt("project_topic/automated_building_inspection_system/location", msg);
       publish_mqtt("project_topic/automated_building_inspection_system/location", msgCloseY);
-      publish_mqtt("project_topic/automated_building_inspection_system/location", msgEvenCloserY);
+      # publish_mqtt("project_topic/automated_building_inspection_system/location", msgEvenCloserY);
 
       time.sleep(2)
 
