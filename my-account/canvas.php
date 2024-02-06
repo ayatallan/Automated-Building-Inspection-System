@@ -179,6 +179,7 @@
                 <button onclick="disconnectMQTT()" class="btn btn-disconnect">Disconnect MQTT</button>
                 <button class="btn btn-reconnect" onclick="reconnectMQTT();">Reconnect MQTT</button>
             </div>
+            
             <script>
 
                 var canvas = document.getElementById("test_canvas");
