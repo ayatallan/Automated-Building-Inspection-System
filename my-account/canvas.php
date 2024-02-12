@@ -103,7 +103,7 @@
             }
 
             function draw(x, y, color, x_meter, y_meter, type) {
-                if (checkMinDistance(x, y, type)) {
+              //  if (checkMinDistance(x, y, type)) {
                     var canvas = document.getElementById("test_canvas");
                     var l = canvas.getContext('2d');
                     var radius = 5;
@@ -127,7 +127,7 @@
                     l.font = '12px Arial';
                     l.textAlign = 'center';
                     l.fillText(label, labelX, labelY);
-                }
+             //   }
             }
 
             function checkMinDistance(x, y, type) {
