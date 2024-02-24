@@ -103,7 +103,7 @@
             }
 
             function draw(x, y, color, x_meter, y_meter, type) {
-              //  if (checkMinDistance(x, y, type)) {
+                if (checkMinDistance(x, y, type)) {
                     var canvas = document.getElementById("test_canvas");
                     var l = canvas.getContext('2d');
                     var radius = 5;
@@ -127,15 +127,16 @@
                     l.font = '12px Arial';
                     l.textAlign = 'center';
                     l.fillText(label, labelX, labelY);
-             //   }
+                }
             }
 
             function checkMinDistance(x, y, type) {
-                const minDistance = 20;
-
+                const minDistanceMeters = 0.2; // Adjust this value to your preference
+                const minDistancePixels = minDistanceMeters * scale_meter_to_pixel;
+                // const minDistance = 20;
                 for (const circle of circles) {
                     const distance = Math.sqrt((x - circle.x) ** 2 + (y - circle.y) ** 2);
-                    if (distance < minDistance && circle.type === type) {
+                    if (distance < minDistancePixels && circle.type === type) {
                         console.log(`Ignored point (${x.toFixed(2)}, ${y.toFixed(2)}, ${type}) - Too close to (${circle.x.toFixed(2)}, ${circle.y.toFixed(2)}, ${circle.type})`);
                         return false;
                     }
@@ -179,7 +180,7 @@
                 <button onclick="disconnectMQTT()" class="btn btn-disconnect">Disconnect MQTT</button>
                 <button class="btn btn-reconnect" onclick="reconnectMQTT();">Reconnect MQTT</button>
             </div>
-            
+
             <script>
 
                 var canvas = document.getElementById("test_canvas");

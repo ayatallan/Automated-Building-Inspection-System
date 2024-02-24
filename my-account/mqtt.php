@@ -157,7 +157,8 @@
       port:'8000', 
       client_name:'client_automated_building_inspection_system_'+String(Math.random()),
       username:'', 
-      password:''
+      password:'',
+	  useSSL: true 
     
     }
     );
@@ -171,6 +172,8 @@
         mqtt.disconnect();
         connected_flag = 0;
         console.log("Disconnected.");
+		window.alert("Disconnected")
+
     } else {
         console.log("Not connected to MQTT.");
     }

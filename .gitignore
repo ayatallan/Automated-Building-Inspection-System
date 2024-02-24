@@ -2,3 +2,6 @@
 
  /keras model
  /Scripts
+
+# connect to MYsql shell
+ mysql -h ls-c518f8b51062a200e07267aba15aa47cef9f0c81.c1ui2eio8yhz.us-west-2.rds.amazonaws.com -u inspection -p

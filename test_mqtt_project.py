@@ -63,13 +63,18 @@ def demo_test_publish():
   while 1:
 
   
-      msg = "0,3,cracks";
-      msgCloseY = "4.7,3.75,structural_defect";
-      # msgEvenCloserY = "0,3.2,structural_defect";
+      msg1 = "0,3,cracks";
+      msg2 = "4.8,0,structural_defect";
+      msg = "0.3,6,cracks";
+      msg3 = "3.9, 4.2,structural_defect";
+
 
       #  Publish the messages
       publish_mqtt("project_topic/automated_building_inspection_system/location", msg);
-      publish_mqtt("project_topic/automated_building_inspection_system/location", msgCloseY);
+      publish_mqtt("project_topic/automated_building_inspection_system/location", msg1);
+      publish_mqtt("project_topic/automated_building_inspection_system/location", msg2);
+      publish_mqtt("project_topic/automated_building_inspection_system/location", msg3);
+
       # publish_mqtt("project_topic/automated_building_inspection_system/location", msgEvenCloserY);
 
       time.sleep(2)
